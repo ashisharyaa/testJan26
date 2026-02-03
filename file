@@ -1,1 +1,20 @@
-Hello Devops folks!!!
+---
+- name: Assignment 3.1 - User and Disk Report
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Create supportuser
+      user:
+        name: supportuser
+        state: present
+        shell: /bin/bash
+
+    - name: Give sudo access to supportuser
+      user:
+        name: supportuser
+        groups: sudo
+        append: yes
+
+    - name: Save disk usage to file
+      shell: df -h > /tmp/diskreport.txt
